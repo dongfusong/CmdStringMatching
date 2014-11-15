@@ -24,8 +24,8 @@ protected:
 TEST_F(TestCmdMatcher, )
 {
 	CmdMatcher matcher;
-	matcher.addCmd("fei:0/2/3:5");
-	matcher.addCmd("fei:1/2/3:5");
+	matcher.addCmd("fei:0");
+	matcher.addCmd("fei:1");
 	std::vector<string> relates;
 	matcher.getRelatedStrings("fei:", relates);
 	ASSERT_EQ(false, relates.empty());

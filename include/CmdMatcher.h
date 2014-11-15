@@ -9,11 +9,12 @@
 #define CMDMATCHER_H_
 #include <string>
 #include <vector>
-
+#include "NodeContainer.h"
 class CmdMatcher {
 public:
 	void addCmd(const std::string& str);
-	void getRelatedStrings(const std::string& str, std::vector<std::string>);
+	void getRelatedStrings(const std::string& str, std::vector<std::string>& opts);
 private:
+	NodeContainer _container;
 };
 #endif /* CMDMATCHER_H_ */
