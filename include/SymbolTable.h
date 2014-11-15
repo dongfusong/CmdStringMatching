@@ -27,8 +27,4 @@ private:
 	std::set<char> _symbols;
 };
 
-
-
-
-
 #endif /* SYMBOLTABLE_H_ */
