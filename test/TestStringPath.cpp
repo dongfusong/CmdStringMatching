@@ -30,6 +30,7 @@ TEST_F(TestStringPath, test_string_path)
 	EXPECT_EQ("1", path.getCurrentPart());
 	path.next();
 	EXPECT_EQ("-", path.getCurrentPart());
+	EXPECT_EQ("-", path.getCurrentPart());
 	path.next();
 	EXPECT_EQ("2", path.getCurrentPart());
 	path.next();

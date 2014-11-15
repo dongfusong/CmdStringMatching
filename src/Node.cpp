@@ -1,27 +1,28 @@
-#include "Node.h"
+#include "CmdNode.h"
 #include "StringPath.h"
 #include <iostream>
 #include <assert.h>
 using namespace std;
 
-Node::Node(const std::string& content, StringPath& str):_content(content){
-	add(str);
+CmdNode::CmdNode(const std::string& content, StringPath& str):_content(content){
+	addChild(str);
 }
 
-void Node::add(StringPath& str) {
+void CmdNode::addChild(StringPath& str) {
 	if (str.isDone()){
 		return;
 	}
-	_childs.add(str);
+	_childs.addNode(str);
 }
 
-void Node::getRelatedStrings(StringPath& str,
-		std::vector<std::string>& opts) {
+void CmdNode::getNextPossibleStrings(StringPath& str,
+		std::vector<std::string>& opts) const{
 	assert(!str.isDone());
+	assert(_content == str.getCurrentPart());
 	str.next();
-	_childs.getRelatedStrings(str, opts);
+	_childs.getNextPossibleStrings(str, opts);
 }
 
-std::string Node::getContent() const {
+std::string CmdNode::getContent() const {
 	return _content;
 }

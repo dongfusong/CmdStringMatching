@@ -8,9 +8,7 @@
 #ifndef SYMBOLTABLE_H_
 #define SYMBOLTABLE_H_
 #include <set>
-
-class SymbolTable {
-public:
+struct SymbolTable {
 	static SymbolTable getInstance(){
 		static SymbolTable instance;
 		return instance;
