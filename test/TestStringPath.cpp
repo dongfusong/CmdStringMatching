@@ -20,14 +20,23 @@ public:
 protected:
 };
 
-TEST_F(TestStringPath, )
+TEST_F(TestStringPath, test_string_path)
 {
-	StringPath path("fei:1");
+	StringPath path("fei:1-2/3");
 	EXPECT_EQ("fei", path.getCurrentPart());
 	path.next();
 	EXPECT_EQ(":", path.getCurrentPart());
 	path.next();
 	EXPECT_EQ("1", path.getCurrentPart());
+	path.next();
+	EXPECT_EQ("-", path.getCurrentPart());
+	path.next();
+	EXPECT_EQ("2", path.getCurrentPart());
+	path.next();
+	EXPECT_EQ("/", path.getCurrentPart());
+	path.next();
+	EXPECT_EQ("3", path.getCurrentPart());
+	path.next();
 	EXPECT_EQ(true, path.isDone());
 }
 

@@ -1,12 +1,13 @@
 #include "NodeContainer.h"
 #include "Node.h"
 #include "StringPath.h"
+#include <iostream>
+#include <assert.h>
 using namespace std;
 
+
 void NodeContainer::add(StringPath& str) {
-	if (str.isDone()){
-		return;
-	}
+	assert(!str.isDone());
 	string content = str.getCurrentPart();
 	str.next();
 	NodeMap::iterator iter = _nodes.find(content);
@@ -19,15 +20,15 @@ void NodeContainer::add(StringPath& str) {
 
 void NodeContainer::getRelatedStrings(StringPath& str,
 		std::vector<std::string>& opts) {
-	//根据key寻找下个
 	if (str.isDone()){
+		for (NodeMap::iterator iter = _nodes.begin(); iter != _nodes.end(); ++iter){
+			opts.push_back(iter->second->getContent());
+		}
 		return;
 	}
 	string content = str.getCurrentPart();
 	NodeMap::iterator iter = _nodes.find(content);
 	if (iter != _nodes.end()){
-		return;
+		iter->second->getRelatedStrings(str, opts);
 	}
-	str.next();
-	iter->second->getRelatedStrings(str, opts);
 }

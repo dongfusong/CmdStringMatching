@@ -11,25 +11,16 @@
 
 class StringPath {
 public:
-	StringPath(const std::string& str):_content(str){
-
-	}
-
-	std::string getCurrentPart(){
-		return "";
-	}
-	void next(){
-
-	}
-	bool isDone(){
-		return true;
-	}
+	StringPath(const std::string& str);
+	std::string getCurrentPart();
+	void next();
+	bool isDone()const;
+private:
+	bool isSymbol(char c) const;
+	int findSymbol(const std::string& str, int beginPos);
 private:
 	std::string _content;
+	size_t _currentPartPos;
+	size_t _nextPartPos;
 };
-
-
-
-
-
 #endif /* COMMONDSTRING_H_ */

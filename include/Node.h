@@ -14,6 +14,9 @@ public:
 	Node(const std::string& content, StringPath& restStr);
 	void add(StringPath& str);
 	void getRelatedStrings(StringPath& str, std::vector<std::string>& opts);
+	std::string getContent()const{
+		return _content;
+	}
 private:
 	std::string _content;
 	NodeContainer _childs;
