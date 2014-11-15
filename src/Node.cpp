@@ -21,3 +21,7 @@ void Node::getRelatedStrings(StringPath& str,
 	str.next();
 	_childs.getRelatedStrings(str, opts);
 }
+
+std::string Node::getContent() const {
+	return _content;
+}

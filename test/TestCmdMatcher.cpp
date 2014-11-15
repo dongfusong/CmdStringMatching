@@ -21,6 +21,26 @@ public:
 protected:
 };
 
+
+TEST_F(TestCmdMatcher, can_match_nothing_if_wrong){
+	CmdMatcher matcher;
+	matcher.addCmd("fei:0/1/2");
+	std::vector<string> relates;
+	matcher.getRelatedStrings("pei", relates);
+	ASSERT_EQ(0, relates.size());
+	relates.clear();
+	matcher.getRelatedStrings("fei:0/1/2/", relates);
+	ASSERT_EQ(0, relates.size());
+}
+
+TEST_F(TestCmdMatcher, if_finish_can_match_nothing){
+	CmdMatcher matcher;
+	matcher.addCmd("fei:0/1/2");
+	std::vector<string> relates;
+	matcher.getRelatedStrings("fei:0/1/2", relates);
+	ASSERT_EQ(0, relates.size());
+}
+
 TEST_F(TestCmdMatcher, return_all_opts_if_empty){
 	CmdMatcher matcher;
 	matcher.addCmd("fei:");
@@ -45,22 +65,25 @@ TEST_F(TestCmdMatcher, can_match_symbol)
 
 TEST_F(TestCmdMatcher, can_match_multi_num_opts){
 	CmdMatcher matcher;
-	matcher.addCmd("fei:0/1/2");
-	matcher.addCmd("fei:0/1/3");
-	matcher.addCmd("fei:1/1/3");
+	matcher.addCmd("fei:0/1-2");
+	matcher.addCmd("fei:0/1-3");
+	matcher.addCmd("fei:11/1/3");
 	matcher.addCmd("fei:2/1/3");
 	std::vector<string> relates;
 	matcher.getRelatedStrings("fei:", relates);
 	ASSERT_EQ(3, relates.size());
 	EXPECT_EQ("0",relates[0]);
-	EXPECT_EQ("1",relates[1]);
+	EXPECT_EQ("11",relates[1]);
 	EXPECT_EQ("2",relates[2]);
 	relates.clear();
-	matcher.getRelatedStrings("fei:0/1/", relates);
+	matcher.getRelatedStrings("fei:0/1-", relates);
 	ASSERT_EQ(2, relates.size());
 	EXPECT_EQ("2",relates[0]);
 	EXPECT_EQ("3",relates[1]);
 }
+
+
+
 
 
 
