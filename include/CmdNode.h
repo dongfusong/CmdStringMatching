@@ -16,7 +16,6 @@ struct CmdNode {
 	std::string getContent() const;
 private:
 	std::string _content;
-	//const std::string& _content; ??
 	CmdNodeContainer _childs;
 };
 #endif /* NODE_H_ */

@@ -1,26 +1,43 @@
 #include "StringPath.h"
 #include "SymbolTable.h"
+#include <iostream>
+#include <assert.h>
 using namespace std;
 
-StringPath::StringPath(const std::string& str) :
-		_str(str),_currentPartPos(0),_nextPartPos(0) {
+StringPath::StringPath(const std::string& str):_currentIndex(0),_str(str){
+
 }
 
-std::string StringPath::getCurrentPart() {
-	if (isSymbol(_str[_currentPartPos])){
-		_nextPartPos = _currentPartPos+1;
-		return string(1, _str[_currentPartPos]);
+int StringPath::parse() {
+	int beginPos = 0, endPos = 0;
+	while (beginPos < _str.size()) {
+		if (isSymbol (_str[beginPos])) {
+			_parts.push_back(string(1, _str[beginPos]));
+			beginPos++;
+		} else {
+			endPos = findSymbol(_str, beginPos);
+			_parts.push_back(_str.substr(beginPos, endPos - beginPos));
+			beginPos = endPos;
+		}
 	}
-	_nextPartPos = findSymbol(_str, _currentPartPos);
-	 return _str.substr(_currentPartPos, _nextPartPos - _currentPartPos);
+	return SUCCESS;
+}
+
+std::string StringPath::getCurrentPart()const{
+	assert(not isDone());
+	return _parts[_currentIndex];
+}
+
+void StringPath::first() {
+	_currentIndex = 0;
 }
 
 void StringPath::next() {
-	_currentPartPos = _nextPartPos;
+	_currentIndex++;
 }
 
 bool StringPath::isDone() const{
-	return _currentPartPos == _str.size();
+	return _currentIndex == _parts.size();
 }
 
 bool StringPath::isSymbol(char c) const {

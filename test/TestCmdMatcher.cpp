@@ -20,7 +20,6 @@ public:
 	}
 protected:
 };
-
 TEST_F(TestCmdMatcher, can_match_nothing_if_wrong){
 	CmdMatcher matcher;
 	matcher.configCmd("fei:0/1/2");
