@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 #include "CmdNodeContainer.h"
-struct CmdMatcher {
+struct CmdStringMatcher {
 	void configCmd(const std::string& str);
 	void getNextPossibleStrings(const std::string& str, std::vector<std::string>& opts);
 private:

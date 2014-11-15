@@ -15,10 +15,10 @@
 struct StringPath {
 	StringPath(const std::string& str);
 	int parse();
-	std::string getCurrentPart()const;
 	void first();
 	void next();
 	bool isDone()const;
+	std::string getCurrentPart()const;
 private:
 	bool isSymbol(char c) const;
 	int findSymbol(const std::string& str, int beginPos)const;

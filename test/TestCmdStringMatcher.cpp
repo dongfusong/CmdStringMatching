@@ -7,7 +7,7 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <string>
-#include "CmdMatcher.h"
+#include "CmdStringMatcher.h"
 using namespace std;
 
 class TestCmdMatcher: public testing::Test {
@@ -21,7 +21,7 @@ public:
 protected:
 };
 TEST_F(TestCmdMatcher, can_match_nothing_if_wrong){
-	CmdMatcher matcher;
+	CmdStringMatcher matcher;
 	matcher.configCmd("fei:0/1/2");
 	std::vector<string> relates;
 	matcher.getNextPossibleStrings("pei", relates);
@@ -32,7 +32,7 @@ TEST_F(TestCmdMatcher, can_match_nothing_if_wrong){
 }
 
 TEST_F(TestCmdMatcher, if_finish_can_match_nothing){
-	CmdMatcher matcher;
+	CmdStringMatcher matcher;
 	matcher.configCmd("fei:0/1/2");
 	std::vector<string> relates;
 	matcher.getNextPossibleStrings("fei:0/1/2", relates);
@@ -40,7 +40,7 @@ TEST_F(TestCmdMatcher, if_finish_can_match_nothing){
 }
 
 TEST_F(TestCmdMatcher, return_all_opts_if_empty){
-	CmdMatcher matcher;
+	CmdStringMatcher matcher;
 	matcher.configCmd("fei:");
 	matcher.configCmd("pei:");
 	std::vector<string> relates;
@@ -52,7 +52,7 @@ TEST_F(TestCmdMatcher, return_all_opts_if_empty){
 
 TEST_F(TestCmdMatcher, can_match_symbol)
 {
-	CmdMatcher matcher;
+	CmdStringMatcher matcher;
 	matcher.configCmd("fei:");
 	matcher.configCmd("pei:");
 	std::vector<string> relates;
@@ -62,7 +62,7 @@ TEST_F(TestCmdMatcher, can_match_symbol)
 }
 
 TEST_F(TestCmdMatcher, can_match_multi_num_opts){
-	CmdMatcher matcher;
+	CmdStringMatcher matcher;
 	matcher.configCmd("fei:0/1-2");
 	matcher.configCmd("fei:0/1-3:3");
 	matcher.configCmd("fei:11/1/3");

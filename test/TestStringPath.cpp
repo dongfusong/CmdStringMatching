@@ -23,7 +23,7 @@ protected:
 TEST_F(TestStringPath, test_string_path)
 {
 	StringPath path("fei:1-2/3");
-	path.parse();
+	EXPECT_EQ(0, path.parse());
 	EXPECT_EQ("fei", path.getCurrentPart());
 	path.next();
 	EXPECT_EQ(":", path.getCurrentPart());
