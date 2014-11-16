@@ -13,8 +13,10 @@
 struct StringPath;
 struct CmdNode;
 struct CmdNodeContainer {
-	void addNode(StringPath& str);
-	void getNextPossibleStrings(StringPath& str, std::vector<std::string>& opts)const;
+	void addNode(StringPath& path);
+	void getNextPossibleStrings(StringPath& path, std::vector<std::string>& opts)const;
+private:
+	void addChildsToOpts(std::vector<std::string>& opts)const;
 private:
 	typedef std::map<std::string, CmdNode*> NodeMap;
 	typedef NodeMap::iterator Iterator;

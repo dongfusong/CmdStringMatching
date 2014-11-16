@@ -8,11 +8,11 @@
 #ifndef NODE_H_
 #define NODE_H_
 #include "CmdNodeContainer.h"
-struct StringPath;
+struct CmdStringPath;
 struct CmdNode {
-	CmdNode(const std::string& content, StringPath& restStr);
-	void addChild(StringPath& str);
-	void getNextPossibleStrings(StringPath& str, std::vector<std::string>& opts)const;
+	CmdNode(const std::string& content, StringPath& path);
+	void addChild(StringPath& path);
+	void getNextPossibleStrings(StringPath& path, std::vector<std::string>& opts)const;
 	std::string getContent() const;
 private:
 	std::string _content;

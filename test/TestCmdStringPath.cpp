@@ -7,7 +7,7 @@
 
 #include <gtest/gtest.h>
 #include <string>
-#include "StringPath.h"
+#include "CmdStringPath.h"
 using namespace std;
 class TestStringPath: public testing::Test {
 public:
@@ -22,7 +22,7 @@ protected:
 
 TEST_F(TestStringPath, test_string_path)
 {
-	StringPath path("fei:1-2/3");
+	CmdStringPath path("fei:1-2/3");
 	EXPECT_EQ(0, path.parse());
 	EXPECT_EQ("fei", path.getCurrentPart());
 	path.next();

@@ -1,32 +1,23 @@
 /*
  * StringPath.h
  *
- *  Created on: 2014年11月15日
+ *  Created on: 2014年11月16日
  *      Author: Thoughtworks
  */
 
-#ifndef STRING_PATH_H_
-#define STRING_PATH_H_
+#ifndef STRINGPATH_H_
+#define STRINGPATH_H_
 #include <string>
-#include <vector>
-#define SUCCESS 0
-#define FAILE 1
+#define ABSTRACT(...) virtual __VA_ARGS__ = 0;
 
-struct StringPath {
-	StringPath(const std::string& str);
-	int parse();
-	void first();
-	void next();
-	bool isDone()const;
-	std::string getCurrentPart()const;
-private:
-	bool isSymbol(char c) const;
-	int findSymbol(const std::string& str, int beginPos)const;
-private:
-	std::vector<std::string> _parts;
-	size_t _currentIndex;
-	std::string _str;
+template<typename T>
+struct Path{
+	ABSTRACT(virtual void first());
+	ABSTRACT(void next())
+	ABSTRACT(bool isDone()const);
+	ABSTRACT(T getCurrentPart()const);
+	virtual ~Path(){}
 };
 
-
-#endif /* COMMONDSTRING_H_ */
+struct StringPath : Path<std::string>{};
+#endif /* STRINGPATH_H_ */

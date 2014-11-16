@@ -1,14 +1,14 @@
-#include "StringPath.h"
-#include "SymbolTable.h"
+#include "CmdStringPath.h"
+#include "PartitionSymbolDef.h"
 #include <iostream>
 #include <assert.h>
 using namespace std;
 
-StringPath::StringPath(const std::string& str):_currentIndex(0),_str(str){
+CmdStringPath::CmdStringPath(const std::string& str):_currentIndex(0),_str(str){
 
 }
 
-int StringPath::parse() {
+int CmdStringPath::parse() {
 	int beginPos = 0, endPos = 0;
 	while (beginPos < _str.size()) {
 		if (isSymbol (_str[beginPos])) {
@@ -23,28 +23,28 @@ int StringPath::parse() {
 	return SUCCESS;
 }
 
-std::string StringPath::getCurrentPart()const{
+std::string CmdStringPath::getCurrentPart()const{
 	assert(not isDone());
 	return _parts[_currentIndex];
 }
 
-void StringPath::first() {
+void CmdStringPath::first() {
 	_currentIndex = 0;
 }
 
-void StringPath::next() {
+void CmdStringPath::next() {
 	_currentIndex++;
 }
 
-bool StringPath::isDone() const{
+bool CmdStringPath::isDone() const{
 	return _currentIndex == _parts.size();
 }
 
-bool StringPath::isSymbol(char c) const {
-	return SymbolTable::getInstance().isSymbol(c);
+bool CmdStringPath::isSymbol(char c) const {
+	return SYMBOL_TABLE(Partition).isSymbol(c);
 }
 
-int StringPath::findSymbol(const std::string& str, int beginPos)const{
+int CmdStringPath::findSymbol(const std::string& str, int beginPos)const{
 	int i = beginPos;
 	for (; i < str.size(); i++) {
 		if (isSymbol(str[i])) {
